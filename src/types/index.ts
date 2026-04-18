@@ -26,6 +26,9 @@ export interface User {
   };
 }
 
+export type CourseCategory = 'Business' | 'Marketing' | 'Technology' | 'Finance' | 'Personal Development' | 'Social Media' | 'Other';
+export type CourseDifficulty = 'Beginner' | 'Intermediate' | 'Advanced';
+
 export interface Course {
   id: string;
   slug: string;
@@ -33,6 +36,12 @@ export interface Course {
   description: string;
   thumbnail: string;
   status: 'published' | 'draft';
+  price: number;
+  category: CourseCategory;
+  difficulty: CourseDifficulty;
+  instructor: string;
+  previewVideoUrl: string;
+  whatYouLearn: string[];
   modules: Module[];
 }
 
@@ -40,9 +49,22 @@ export interface Module {
   id: string;
   courseId: string;
   title: string;
+  description: string;
   orderIndex: number;
   isFree: boolean;
   submodules: SubModule[];
+}
+
+export type ResourceType = 'pdf' | 'doc' | 'image' | 'other';
+
+export interface Resource {
+  id: string;
+  submoduleId: string;
+  title: string;
+  fileUrl: string;
+  fileType: ResourceType;
+  fileSize?: number;
+  orderIndex: number;
 }
 
 export interface SubModule {
@@ -52,6 +74,7 @@ export interface SubModule {
   description: string;
   orderIndex: number;
   videos: Video[];
+  resources: Resource[];
 }
 
 export interface Video {
